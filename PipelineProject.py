@@ -4,18 +4,25 @@ from Bio import SeqIO
 from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
 
-#os.makedirs("PipelineProject_Walter_McCain") #Making New directory
+os.makedirs("PipelineProject_Walter_McCain") #Making New directory
 os.chdir("PipelineProject_Walter_McCain") #Get into directory
 
+#Full Data files Download
 #os.system("wget 'https://sra-pub-run-odp.s3.amazonaws.com/sra/SRR5660030/SRR5660030'")
 #os.system("wget 'https://sra-pub-run-odp.s3.amazonaws.com/sra/SRR5660033/SRR5660033'")
 #os.system("wget 'https://sra-pub-run-odp.s3.amazonaws.com/sra/SRR5660044/SRR5660044'")
 #os.system("wget 'https://sra-pub-run-odp.s3.amazonaws.com/sra/SRR5660045/SRR5660045'")
 
-#os.system("fastq-dump -I --split-files SRR5660030") #Uncompress downloaded data
-#os.system("fastq-dump -I --split-files SRR5660033")
-#os.system("fastq-dump -I --split-files SRR5660044")
-#os.system("fastq-dump -I --split-files SRR5660045")
+#Compressed Download
+os.system("wget --max-redirect=0 --header='Range: bytes=0-79999' 'https://sra-pub-run-odp.s3.amazonaws.com/sra/SRR5660030/SRR5660030'")
+os.system("wget --max-redirect=0 --header='Range: bytes=0-79999' 'https://sra-pub-run-odp.s3.amazonaws.com/sra/SRR5660033/SRR5660033'")
+os.system("wget --max-redirect=0 --header='Range: bytes=0-79999' 'https://sra-pub-run-odp.s3.amazonaws.com/sra/SRR5660044/SRR5660044'")
+os.system("wget --max-redirect=0 --header='Range: bytes=0-79999' 'https://sra-pub-run-odp.s3.amazonaws.com/sra/SRR5660045/SRR5660045'")
+
+os.system("fastq-dump -I --split-files SRR5660030") #Uncompress downloaded data
+os.system("fastq-dump -I --split-files SRR5660033")
+os.system("fastq-dump -I --split-files SRR5660044")
+os.system("fastq-dump -I --split-files SRR5660045")
 
 Entrez.email = 'wmccain@luc.edu'
 handle = Entrez.efetch(db="nucleotide", id="NC_006273.2", rettype = "gb", retmode = "text")
