@@ -61,7 +61,10 @@ with open("significant_transcripts.txt") as st:
         test_stat = fields[1]
         pval = fields[2]
         qval = fields[3]
-        f.write(f"{target_id}\t{test_stat}\t{pval}\t{qval}\n") #variables are then written to the "log.txt" file
+        seq_record = SeqIO.parse("fasta_file.fasta", "fasta")
+        for record in seq_record:
+            if target_id == record.id:
+                f.write(f"{target_id}\t{test_stat}\t{pval}\t{qval}\n") #variables are then written to the "log.txt" file
 
 tpm_data = {} #dict to store tpm values for each protien id
 for sample in samples: ##extract TPM data and store tpm_data dict keyed by protein ID and sample ID
